@@ -13,17 +13,15 @@ type GetUserResponse struct {
 	Username  string `json:"username"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
-	Password  string `json:"password"`
 	Age       int    `json:"age"`
 }
 
 // NewGetUserResponse is the GetUserResponse factory function
-func NewGetUserResponse(username, firstName, lastName, password string, age int) GetUserResponse {
+func NewGetUserResponse(username, firstName, lastName string, age int) GetUserResponse {
 	return GetUserResponse{
 		Username:  username,
 		FirstName: firstName,
 		LastName:  lastName,
-		Password:  password,
 		Age:       age,
 	}
 }
@@ -38,11 +36,11 @@ func (ser service) GetUser(user GetUserReqeust) (GetUserResponse, error) {
 		return GetUserResponse{}, errEmptyUsername
 	}
 	// TODO: check user does exsist or not(do sql query for example).
+	// TODO: if user exists, also check the password.
 	resp := NewGetUserResponse(
 		user.Username,
 		"mohammad",
 		"katoozi",
-		"test",
 		22,
 	)
 	return resp, nil
