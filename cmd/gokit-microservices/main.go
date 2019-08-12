@@ -3,17 +3,28 @@ package main
 import (
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/gorilla/mux"
 	"github.com/katoozi/gokit-microservices/services/users"
 )
 
 func main() {
+	r := mux.NewRouter()
+
 	getUser := users.GetUserHandler()
 	updateUser := users.UpdateUserHandler()
 	deleteUser := users.DeleteUserHandler()
 
-	http.Handle("/user/get", getUser)
-	http.Handle("/user/update", updateUser)
-	http.Handle("/user/delete", deleteUser)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	r.Handle("/user/{id}", getUser).Methods("GET")
+	r.Handle("/user/{id}", updateUser).Methods("PUT")
+	r.Handle("/user/{id}", deleteUser).Methods("GET")
+
+	srv := &http.Server{
+		Handler:      r,
+		Addr:         "127.0.0.1:8080",
+		WriteTimeout: 15 * time.Second,
+		ReadTimeout:  15 * time.Second,
+	}
+	log.Fatal(srv.ListenAndServe())
 }
