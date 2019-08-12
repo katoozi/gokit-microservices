@@ -18,7 +18,7 @@ func main() {
 
 	r.Handle("/user/{id}", getUser).Methods("GET")
 	r.Handle("/user/{id}", updateUser).Methods("PUT")
-	r.Handle("/user/{id}", deleteUser).Methods("GET")
+	r.Handle("/user/{id}", deleteUser).Methods("DELETE")
 
 	srv := &http.Server{
 		Handler:      r,

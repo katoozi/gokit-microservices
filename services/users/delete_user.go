@@ -2,10 +2,10 @@ package users
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
 
 	httptransport "github.com/go-kit/kit/transport/http"
+	"github.com/gorilla/mux"
 )
 
 // DeleteUserRequest is the DeleteUser service request structure
@@ -34,9 +34,9 @@ func (ser service) DeleteUser(req DeleteUserRequest) (DeleteUserResponse, error)
 }
 
 func decodeDeleteUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request DeleteUserRequest
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		return nil, err
+	vars := mux.Vars(r)
+	request := DeleteUserRequest{
+		ID: vars["id"],
 	}
 	return request, nil
 }
