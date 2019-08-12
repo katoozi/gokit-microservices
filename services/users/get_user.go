@@ -2,14 +2,15 @@ package users
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
 
 	httptransport "github.com/go-kit/kit/transport/http"
+	"github.com/gorilla/mux"
 )
 
 // GetUserResponse is the GetUser reponse structure
 type GetUserResponse struct {
+	ID        string `json:"id"`
 	Username  string `json:"username"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
@@ -17,8 +18,9 @@ type GetUserResponse struct {
 }
 
 // NewGetUserResponse is the GetUserResponse factory function
-func NewGetUserResponse(username, firstName, lastName string, age int) GetUserResponse {
+func NewGetUserResponse(id, username, firstName, lastName string, age int) GetUserResponse {
 	return GetUserResponse{
+		ID:        id,
 		Username:  username,
 		FirstName: firstName,
 		LastName:  lastName,
@@ -28,17 +30,18 @@ func NewGetUserResponse(username, firstName, lastName string, age int) GetUserRe
 
 // GetUserReqeust is the GetUser request structure
 type GetUserReqeust struct {
-	Username string `json:"username"`
+	ID string `json:"id"`
 }
 
 func (ser service) GetUser(user GetUserReqeust) (GetUserResponse, error) {
-	if user.Username == "" {
+	if user.ID == "" {
 		return GetUserResponse{}, errEmptyUsername
 	}
 	// TODO: check user does exsist or not(do sql query for example).
 	// TODO: if user exists, also check the password.
 	resp := NewGetUserResponse(
-		user.Username,
+		user.ID,
+		"download",
 		"mohammad",
 		"katoozi",
 		22,
@@ -47,9 +50,9 @@ func (ser service) GetUser(user GetUserReqeust) (GetUserResponse, error) {
 }
 
 func decodeGetUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request GetUserReqeust
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		return nil, err
+	vars := mux.Vars(r)
+	request := GetUserReqeust{
+		ID: vars["id"],
 	}
 	return request, nil
 }
