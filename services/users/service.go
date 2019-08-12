@@ -16,5 +16,6 @@ type Service interface {
 type service struct{}
 
 func encodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
+	// if you wanto change response code do it here.
 	return json.NewEncoder(w).Encode(response)
 }
