@@ -16,3 +16,14 @@ func makeGetUserEndpoint(svc Service) endpoint.Endpoint {
 		return v, nil
 	}
 }
+
+func makeUpdateUserEndpoint(svc Service) endpoint.Endpoint {
+	return func(_ context.Context, request interface{}) (interface{}, error) {
+		req := request.(UpdateUserRequest)
+		v, err := svc.UpdateUser(req)
+		if err != nil {
+			return nil, err
+		}
+		return v, nil
+	}
+}

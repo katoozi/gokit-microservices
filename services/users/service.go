@@ -9,6 +9,7 @@ import (
 // Service is the users microservice interface
 type Service interface {
 	GetUser(GetUserReqeust) (GetUserResponse, error)
+	UpdateUser(UpdateUserRequest) (UpdateUserResponse, error)
 }
 
 type service struct{}
