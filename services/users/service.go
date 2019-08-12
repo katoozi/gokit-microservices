@@ -11,6 +11,7 @@ type Service interface {
 	GetUser(GetUserReqeust) (GetUserResponse, error)
 	UpdateUser(UpdateUserRequest) (UpdateUserResponse, error)
 	DeleteUser(DeleteUserRequest) (DeleteUserResponse, error)
+	CreateUser(CreateUserRequest) (CreateUserResponse, error)
 }
 
 type service struct{}

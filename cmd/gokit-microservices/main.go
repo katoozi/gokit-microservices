@@ -15,10 +15,12 @@ func main() {
 	getUser := users.GetUserHandler()
 	updateUser := users.UpdateUserHandler()
 	deleteUser := users.DeleteUserHandler()
+	createUser := users.CreateUserHandler()
 
 	router.Handle("/user/{id}", getUser).Methods("GET")
 	router.Handle("/user/{id}", updateUser).Methods("PUT")
 	router.Handle("/user/{id}", deleteUser).Methods("DELETE")
+	router.Handle("/user", createUser).Methods("CREATE")
 
 	srv := &http.Server{
 		Handler:      router,
