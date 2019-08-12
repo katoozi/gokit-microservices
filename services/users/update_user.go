@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	httptransport "github.com/go-kit/kit/transport/http"
+	"github.com/gorilla/mux"
 )
 
 // UpdateUserRequest is the UpdateUser request structure
@@ -42,6 +43,8 @@ func decodeUpdateUserRequest(_ context.Context, r *http.Request) (interface{}, e
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		return nil, err
 	}
+	vars := mux.Vars(r)
+	request.ID = vars["id"]
 	return request, nil
 }
 
