@@ -10,6 +10,7 @@ import (
 type Service interface {
 	GetUser(GetUserReqeust) (GetUserResponse, error)
 	UpdateUser(UpdateUserRequest) (UpdateUserResponse, error)
+	DeleteUser(DeleteUserRequest) (DeleteUserResponse, error)
 }
 
 type service struct{}

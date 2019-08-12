@@ -27,3 +27,14 @@ func makeUpdateUserEndpoint(svc Service) endpoint.Endpoint {
 		return v, nil
 	}
 }
+
+func makeDeleteUserEndpoint(svc Service) endpoint.Endpoint {
+	return func(_ context.Context, request interface{}) (interface{}, error) {
+		req := request.(DeleteUserRequest)
+		v, err := svc.DeleteUser(req)
+		if err != nil {
+			return nil, err
+		}
+		return v, nil
+	}
+}
