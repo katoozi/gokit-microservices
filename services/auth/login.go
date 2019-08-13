@@ -27,7 +27,7 @@ func (ser service) Login(req LoginRequest) (LoginResponse, error) {
 		"username": req.Username,
 		"password": req.Password,
 	})
-	// TODO: check for user exists or not
+	// TODO: check the username and password
 	tokenString, error := token.SignedString([]byte(ser.Secret))
 	if error != nil {
 		fmt.Println(error)
