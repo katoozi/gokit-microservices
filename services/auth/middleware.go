@@ -10,6 +10,13 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+type key int
+
+const (
+	tokenKey key = iota
+)
+
+// Exception is the HeaderValidation error message structure
 type Exception struct {
 	Message string `json:"message"`
 }
@@ -33,7 +40,7 @@ func HeaderValidation(next http.Handler) http.Handler {
 				}
 				if token.Valid {
 					// pass token to http handlers
-					ctx := context.WithValue(req.Context(), "token", token.Raw)
+					ctx := context.WithValue(req.Context(), tokenKey, token.Raw)
 					req = req.WithContext(ctx)
 					next.ServeHTTP(w, req)
 				} else {
