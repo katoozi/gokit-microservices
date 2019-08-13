@@ -18,6 +18,7 @@ func main() {
 	userUrls.Handle("/{id}", users.GetUserHandler()).Methods("GET")
 	userUrls.Handle("/{id}", users.UpdateUserHandler()).Methods("PUT")
 	userUrls.Handle("/{id}", users.DeleteUserHandler()).Methods("DELETE")
+	userUrls.Use(auth.HeaderValidation)
 
 	secret := "askdmajklsdnjkansdjknansdkajsndkjnaskjdnkajsnd"
 	authUrls := router.PathPrefix("/auth").Subrouter()
