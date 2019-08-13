@@ -13,17 +13,15 @@ import (
 func main() {
 	router := mux.NewRouter()
 
-	getUser := users.GetUserHandler()
-	updateUser := users.UpdateUserHandler()
-	deleteUser := users.DeleteUserHandler()
-	createUser := users.CreateUserHandler()
-	login := auth.UpdateUserHandler("asdjkaskjdnajksndkajnsdkjnasjkdnjk")
+	userUrls := router.PathPrefix("/user").Subrouter()
+	userUrls.Handle("/", users.CreateUserHandler()).Methods("CREATE")
+	userUrls.Handle("/{id}", users.GetUserHandler()).Methods("GET")
+	userUrls.Handle("/{id}", users.UpdateUserHandler()).Methods("PUT")
+	userUrls.Handle("/{id}", users.DeleteUserHandler()).Methods("DELETE")
 
-	router.Handle("/user/{id}", getUser).Methods("GET")
-	router.Handle("/user/{id}", updateUser).Methods("PUT")
-	router.Handle("/user/{id}", deleteUser).Methods("DELETE")
-	router.Handle("/user/", createUser).Methods("CREATE")
-	router.Handle("/authenticate/", login).Methods("POST")
+	secret := "askdmajklsdnjkansdjknansdkajsndkjnaskjdnkajsnd"
+	authUrls := router.PathPrefix("/auth").Subrouter()
+	authUrls.Handle("/login", auth.LoginHandler(secret)).Methods("POST")
 
 	srv := &http.Server{
 		Handler:      router,

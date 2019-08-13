@@ -44,8 +44,8 @@ func decodeLoginRequest(_ context.Context, r *http.Request) (interface{}, error)
 	return request, nil
 }
 
-// UpdateUserHandler will give you the UpdateUser service server
-func UpdateUserHandler(secret string) *httptransport.Server {
+// LoginHandler will give you the UpdateUser service server
+func LoginHandler(secret string) *httptransport.Server {
 	svc := service{}
 	svc.Secret = secret
 	return httptransport.NewServer(
