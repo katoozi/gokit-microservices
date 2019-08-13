@@ -33,3 +33,14 @@ Content-Type: text/plain
     "last_name": "example_last",
     "age": 24
 }
+
+
+###
+
+POST  {{host}}/authenticate/ HTTP/1.1
+Content-Type: text/plain
+
+{
+    "username": "test",
+    "password": "122344"
+}
