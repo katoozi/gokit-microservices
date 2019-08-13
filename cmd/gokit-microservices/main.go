@@ -20,7 +20,7 @@ func main() {
 	router.Handle("/user/{id}", getUser).Methods("GET")
 	router.Handle("/user/{id}", updateUser).Methods("PUT")
 	router.Handle("/user/{id}", deleteUser).Methods("DELETE")
-	router.Handle("/user", createUser).Methods("CREATE")
+	router.Handle("/user/", createUser).Methods("CREATE")
 
 	srv := &http.Server{
 		Handler:      router,
