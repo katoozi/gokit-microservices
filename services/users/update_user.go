@@ -43,6 +43,7 @@ func decodeUpdateUserRequest(_ context.Context, r *http.Request) (interface{}, e
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		return nil, err
 	}
+	// access token => r.Context().Value("token")
 	vars := mux.Vars(r)
 	request.ID = vars["id"]
 	return request, nil

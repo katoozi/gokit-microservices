@@ -32,8 +32,9 @@ func HeaderValidation(next http.Handler) http.Handler {
 					return
 				}
 				if token.Valid {
-					ctx := context.WithValue(req.Context(), token, "asdklmaklsmd")
-					req.WithContext(ctx)
+					// pass token to http handlers
+					ctx := context.WithValue(req.Context(), "token", token.Raw)
+					req = req.WithContext(ctx)
 					next.ServeHTTP(w, req)
 				} else {
 					json.NewEncoder(w).Encode(Exception{Message: "Invalid authorization token"})
