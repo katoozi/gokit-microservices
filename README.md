@@ -1,6 +1,6 @@
 # gokit-microservices
 
-## some microservices using go-kit
+**some microservices using go-kit**
 
 ## Services
 
