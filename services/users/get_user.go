@@ -8,14 +8,20 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// GetUserResponse is the GetUser reponse structure
-type GetUserResponse struct {
-	ID        string `json:"id"`
-	Username  string `json:"username"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Age       int    `json:"age"`
-}
+type (
+	// GetUserResponse is the GetUser reponse structure
+	GetUserResponse struct {
+		ID        string `json:"id"`
+		Username  string `json:"username"`
+		FirstName string `json:"first_name"`
+		LastName  string `json:"last_name"`
+		Age       int    `json:"age"`
+	}
+	// GetUserReqeust is the GetUser request structure
+	GetUserReqeust struct {
+		ID string `json:"id"`
+	}
+)
 
 // NewGetUserResponse is the GetUserResponse factory function
 func NewGetUserResponse(id, username, firstName, lastName string, age int) GetUserResponse {
@@ -26,11 +32,6 @@ func NewGetUserResponse(id, username, firstName, lastName string, age int) GetUs
 		LastName:  lastName,
 		Age:       age,
 	}
-}
-
-// GetUserReqeust is the GetUser request structure
-type GetUserReqeust struct {
-	ID string `json:"id"`
 }
 
 func (ser service) GetUser(user GetUserReqeust) (GetUserResponse, error) {

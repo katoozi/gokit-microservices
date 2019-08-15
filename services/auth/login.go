@@ -11,16 +11,18 @@ import (
 	httptransport "github.com/go-kit/kit/transport/http"
 )
 
-// LoginRequest is the login request strucutre
-type LoginRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
+type (
+	// LoginRequest is the login request strucutre
+	LoginRequest struct {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
 
-// LoginResponse is the login response strucutre
-type LoginResponse struct {
-	Token string `json:"token"`
-}
+	// LoginResponse is the login response strucutre
+	LoginResponse struct {
+		Token string `json:"token"`
+	}
+)
 
 func (ser service) Login(req LoginRequest) (LoginResponse, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{

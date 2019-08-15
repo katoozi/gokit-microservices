@@ -10,19 +10,21 @@ import (
 	httptransport "github.com/go-kit/kit/transport/http"
 )
 
-// CreateUserRequest is the CreateUser request structure
-type CreateUserRequest struct {
-	Username  string `json:"username"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Age       int    `json:"age"`
-}
+type (
+	// CreateUserRequest is the CreateUser request structure
+	CreateUserRequest struct {
+		Username  string `json:"username"`
+		FirstName string `json:"first_name"`
+		LastName  string `json:"last_name"`
+		Age       int    `json:"age"`
+	}
 
-// CreateUserResponse is the CreateUser response structure
-type CreateUserResponse struct {
-	ID int `json:"id"`
-	CreateUserRequest
-}
+	// CreateUserResponse is the CreateUser response structure
+	CreateUserResponse struct {
+		ID int `json:"id"`
+		CreateUserRequest
+	}
+)
 
 func (srv service) CreateUser(req CreateUserRequest) (CreateUserResponse, error) {
 	if req.Username == "" {

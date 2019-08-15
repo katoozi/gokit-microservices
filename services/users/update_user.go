@@ -9,19 +9,21 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// UpdateUserRequest is the UpdateUser request structure
-type UpdateUserRequest struct {
-	ID        string `json:"id"`
-	Username  string `json:"username"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Age       int    `json:"age"`
-}
+type (
+	// UpdateUserRequest is the UpdateUser request structure
+	UpdateUserRequest struct {
+		ID        string `json:"id"`
+		Username  string `json:"username"`
+		FirstName string `json:"first_name"`
+		LastName  string `json:"last_name"`
+		Age       int    `json:"age"`
+	}
 
-// UpdateUserResponse is the UpdateUser reponse strucutre
-type UpdateUserResponse struct {
-	UpdateUserRequest
-}
+	// UpdateUserResponse is the UpdateUser reponse strucutre
+	UpdateUserResponse struct {
+		UpdateUserRequest
+	}
+)
 
 func (ser service) UpdateUser(req UpdateUserRequest) (UpdateUserResponse, error) {
 	if req.ID == "" {

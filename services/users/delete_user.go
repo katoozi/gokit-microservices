@@ -8,17 +8,19 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// DeleteUserRequest is the DeleteUser service request structure
-type DeleteUserRequest struct {
-	ID string `json:"id"`
-}
+type (
+	// DeleteUserRequest is the DeleteUser service request structure
+	DeleteUserRequest struct {
+		ID string `json:"id"`
+	}
 
-// DeleteUserResponse is the DeleteUser service response
-type DeleteUserResponse struct {
-	ID      string `json:"id"`
-	Deleted bool   `json:"deleted"`
-	Err     string `json:"error"`
-}
+	// DeleteUserResponse is the DeleteUser service response
+	DeleteUserResponse struct {
+		ID      string `json:"id"`
+		Deleted bool   `json:"deleted"`
+		Err     string `json:"error"`
+	}
+)
 
 func (ser service) DeleteUser(req DeleteUserRequest) (DeleteUserResponse, error) {
 	if req.ID == "" {
